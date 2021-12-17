@@ -1,17 +1,19 @@
 import { useState } from "react";
 import FeatherIcon from 'feather-icons-react';
+import { useDispatch, useSelector } from "react-redux";
+import { updatePostsRating } from "../features/posts/postsSlice";
 
-function RatingButtons({ rating }) {
+
+function RatingButtons({ rating, id }) {
+  const dispatch = useDispatch();
   const [postRating, setPostRating] = useState(rating);
-  const increaseRating = () => {
-    setPostRating(postRating + 1);
-  }
-  const decreaseRating = () => {
-    setPostRating(postRating - 1);
+  const updateRating = (number) => {
+    dispatch(updatePostsRating({id, postRating, number}));
+    setPostRating(postRating + number);
   }
   return (
     <div className="rating">
-      <button className="rating__btn rating__btn--increase" onClick={increaseRating} aria-label="Like this post">
+      <button className="rating__btn rating__btn--increase" onClick={() => updateRating(1)} aria-label="Like this post">
         <FeatherIcon className="rating__btn__icon" icon="thumbs-up" />
       </button>
       <span className="rating__score">{
@@ -20,7 +22,7 @@ function RatingButtons({ rating }) {
           postRating < -99 ? 
             '-99!!' : postRating
       }</span>
-      <button className="rating__btn rating__btn--decrease" onClick={decreaseRating} aria-label="Dislike this post">
+      <button className="rating__btn rating__btn--decrease" onClick={() => updateRating(-1)} aria-label="Dislike this post">
         <FeatherIcon className="rating__btn__icon" icon="thumbs-down" />
       </button>
     </div>
