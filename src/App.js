@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { getPosts, getPostsFromLocalStorage } from "./features/posts/postsSlice";
 import Nav from "./components/Nav";
@@ -18,7 +18,7 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Nav/>
         <main className='main'>
           <Routes>
@@ -26,7 +26,7 @@ function App() {
             <Route path="/post/:id" element={<PostPage/>}/>
           </Routes>
         </main>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
