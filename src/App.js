@@ -1,8 +1,7 @@
-// import getPosts from "../api/github-issues";
 import { useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { getPosts } from "./features/posts/postsSlice";
+import { getPosts, getPostsFromLocalStorage } from "./features/posts/postsSlice";
 import Nav from "./components/Nav";
 import Home from "./views/Home";
 import PostPage from "./views/PostPage";
@@ -11,8 +10,12 @@ import './App.css';
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getPosts());
-  });
+    if(!localStorage.getItem('posts')){
+      dispatch(getPosts());
+    } else{
+      dispatch(getPostsFromLocalStorage()); 
+    }
+  }, []);
   return (
     <div className="App">
       <BrowserRouter>
