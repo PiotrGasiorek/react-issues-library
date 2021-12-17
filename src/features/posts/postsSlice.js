@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 function randomInteger(min, max) {
@@ -29,15 +29,15 @@ export const postsSlice = createSlice({
     posts: null
   },
   reducers: {
-    // increment: (state) => {
-    //   console.log('Action working');
-    // },
-    // decrement: (state) => {
-    //   state.value -= 1
-    // },
-    // incrementByAmount: (state, action) => {
-    //   state.value += action.payload
-    // },
+    getPostsFromLocalStorage: (state) => {
+      state.posts = JSON.parse(localStorage.getItem('posts'));
+    },
+    
+    updatePostsRating: (state, action) => {
+      const index = state.posts.findIndex((post) => post.id === action.payload.id);
+      state.posts[index].rating = action.payload.postRating + action.payload.number;
+      localStorage.setItem('posts', JSON.stringify(state.posts));
+    }
   },
   extraReducers: {
     [getPosts.pending]: (state) => {
@@ -45,7 +45,9 @@ export const postsSlice = createSlice({
     },
     [getPosts.fulfilled]: (state, action) => {
       state.status = "success";
-      state.posts = applyFakeRating(action.payload);
+      const postsWithRating = applyFakeRating(action.payload);
+      localStorage.setItem('posts', JSON.stringify(postsWithRating));
+      state.posts = postsWithRating;
     },
     [getPosts.rejected]: (state) => {
       state.status = "failed";
@@ -53,9 +55,5 @@ export const postsSlice = createSlice({
 },
 });
 
-export const { increment } = postsSlice.actions;
-
-// Action creators are generated for each case reducer function
-// export const { increment, decrement, incrementByAmount } = postsSlice.actions
-
+export const { getPostsFromLocalStorage, updatePostsRating } = postsSlice.actions;
 export default postsSlice.reducer
