@@ -8,7 +8,7 @@ function PostCard({ title, id, date, rating }) {
       <time className="card__date">{date}</time>
       <h3 className="card__title">{title}</h3>
       {/* <p className="card__id">{id}</p> */}
-      <RatingButtons rating={rating}/>
+      <RatingButtons rating={rating} id={id}/>
       <Link className="card__link" to={postPageUrl}>Show issue</Link>
     </div>
   );
