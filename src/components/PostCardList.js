@@ -1,19 +1,19 @@
 import PostCard from "./PostCard";
 
-function PostCardList({ posts }) {
-  const isDataLoading = posts.length === 0;
+function PostCardList({ postsData }) {
   return (
-    <div className="cardsWrapper">
-      {isDataLoading ? 'Loading' : posts.map(post => {
-    return (
-      <PostCard 
-        title={post.title} 
-        id={post.id} 
-        date={post.date} 
-        key={post.id}
-      />
-    )
-  })}
+    <div className="cards-wrapper">
+      {postsData.posts && postsData.posts.map(post => {
+        return (
+          <PostCard 
+            title={post.title} 
+            id={post.id} 
+            date={post.date} 
+            key={post.id}
+            rating={post.rating} 
+          />
+        )
+      })}
       
     </div>
   );
