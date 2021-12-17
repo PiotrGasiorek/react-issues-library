@@ -1,22 +1,23 @@
-import { useState, useEffect } from 'react';
+import PostPageContent from "../components/PostPageContent";
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 
-function PostPage({ posts }) {
+function PostPage() {
   const { id } = useParams();
-  const [post, setPost] = useState({});
-  
-  useEffect(() => {
-    // setPost(posts.filter(post => post.id === id));
-    console.log(posts);
-    console.log(posts.filter(post => post.id !== id));
-    console.log(id);
-  }, [post])
+  let currentPost;
+  const posts = useSelector(state => state.posts);
+  const getCurrentPostData = () => {
+    currentPost = posts.posts.find(post => post.id === parseInt(id));
+  }
+
+  if(posts.posts){
+    getCurrentPostData();
+  }
 
   return (
-    <div>
-      <h1>PostPage</h1>
-      <p>{posts ? 'Loaded' : 'Loading'}</p>
-    </div>
+    <>
+      {currentPost && <PostPageContent post={currentPost}/>}
+    </>
   );
 }
 
