@@ -11,7 +11,7 @@ function RatingButtons({ rating }) {
   }
   return (
     <div className="rating">
-      <button className="rating__btn rating__btn--increase" onClick={increaseRating}>
+      <button className="rating__btn rating__btn--increase" onClick={increaseRating} aria-label="Like this post">
         <FeatherIcon className="rating__btn__icon" icon="thumbs-up" />
       </button>
       <span className="rating__score">{
@@ -20,7 +20,7 @@ function RatingButtons({ rating }) {
           postRating < -99 ? 
             '-99!!' : postRating
       }</span>
-      <button className="rating__btn rating__btn--decrease" onClick={decreaseRating}>
+      <button className="rating__btn rating__btn--decrease" onClick={decreaseRating} aria-label="Dislike this post">
         <FeatherIcon className="rating__btn__icon" icon="thumbs-down" />
       </button>
     </div>
