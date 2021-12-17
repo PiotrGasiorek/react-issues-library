@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+// import getPosts from "../api/github-issues";
+import { useEffect } from 'react';
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { getPosts } from "./features/posts/postsSlice";
+import Nav from "./components/Nav";
+import Home from "./views/Home";
+import PostPage from "./views/PostPage";
 import './App.css';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPosts());
+  });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Nav/>
+        <main className='main'>
+          <Routes>
+            <Route path="/" exact element={<Home/>}/>
+            <Route path="/post/:id" element={<PostPage/>}/>
+          </Routes>
+        </main>
+      </BrowserRouter>
     </div>
   );
 }
 
 export default App;
+
+  // ?page=1&per_page=10
+  // https://api.github.com/repos/facebook/react/issues
