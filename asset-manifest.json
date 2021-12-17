@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/react-issues-library/static/css/main.1fc31359.css",
+    "main.js": "/react-issues-library/static/js/main.ca318b76.js",
+    "static/js/787.c52a9d61.chunk.js": "/react-issues-library/static/js/787.c52a9d61.chunk.js",
+    "static/media/logo.svg": "/react-issues-library/static/media/logo.60256e7e6a93da5cb34a43161fb50261.svg",
+    "index.html": "/react-issues-library/index.html",
+    "main.1fc31359.css.map": "/react-issues-library/static/css/main.1fc31359.css.map",
+    "main.ca318b76.js.map": "/react-issues-library/static/js/main.ca318b76.js.map",
+    "787.c52a9d61.chunk.js.map": "/react-issues-library/static/js/787.c52a9d61.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1fc31359.css",
+    "static/js/main.ca318b76.js"
+  ]
+}
